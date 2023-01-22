@@ -1,0 +1,98 @@
+@import 'react-bootstrap-sidebar-menu/dist/sidebar-menu.scss';
+@import './rsuiteKojo.css';
+
+
+a, a:hover, a:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+html, body, #root {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "sidebar header" "sidebar main";
+}
+
+.main-header {
+    grid-area: header;
+    padding: 0.5rem;
+}
+
+.main-container {
+    grid-area: main;
+    box-shadow: inset 2px 1px 9px 1px rgba($dark, 0.10);
+    overflow: auto;
+    padding-top: 1rem;
+}
+
+.sidebar-menu {
+    padding-top: 0;
+    flex-direction: column;
+    grid-area: sidebar;
+    overflow-y: auto;
+    background-color: #344146;
+    
+}
+
+.rs-sidenav-collapse-in {
+    //Controls expanded width
+    width: 240px;
+}
+
+.rs-sidenav-inverse {
+    background-color: #344146
+}
+
+.rs-sidenav-inverse .rs-sidenav-item, .rs-sidenav-inverse .rs-dropdown .rs-dropdown-toggle, .rs-sidenav-inverse .rs-sidenav-toggle-button, .rs-sidenav-inverse .rs-dropdown-item-submenu:hover > .rs-dropdown-item-toggle {
+    background-color: #344146
+}
+
+.rs-sidenav-item {
+    text-decoration: none;
+}
+
+.rs-sidenav-inverse .rs-sidenav-item:hover,
+.rs-sidenav-inverse .rs-dropdown .rs-dropdown-toggle:hover,
+.rs-sidenav-inverse .rs-sidenav-toggle-button:hover,
+.rs-sidenav-inverse .rs-dropdown-item-submenu:hover > .rs-dropdown-item-toggle:hover,
+.rs-sidenav-inverse .rs-sidenav-item:focus,
+.rs-sidenav-inverse .rs-dropdown .rs-dropdown-toggle:focus,
+.rs-sidenav-inverse .rs-sidenav-toggle-button:focus,
+.rs-sidenav-inverse .rs-dropdown-item-submenu:hover > .rs-dropdown-item-toggle:focus {
+    background-color: #234f5e;
+}
+
+.rs-sidenav-inverse .rs-sidenav-item.rs-sidenav-item-active,
+.rs-sidenav-inverse .rs-dropdown-item.rs-dropdown-item-active {
+    background-color: #2c6578;
+}
+
+.rs-sidenav-inverse .rs-sidenav-toggle {
+    border-top-color: #2c6578;
+}
+
+.rs-toggle-checked .rs-toggle-presentation:hover {
+    background-color: #2c6578;
+}
+
+.rs-btn-primary:focus {
+    background-color: #2c6578;
+}
+
+
+
+.rs-dropdown-menu {
+    background-color: #283236;
+}
