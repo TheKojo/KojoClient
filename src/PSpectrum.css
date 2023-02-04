@@ -1,0 +1,41 @@
+body {
+    color: #ffffff;
+    background-color: #003741
+}
+
+.homeComponent {
+    font-family: 'Electrolize';
+}
+
+.soonComponent {
+    font-family: 'Electrolize';
+}
+
+#mainWrapper {
+    overflow: auto;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr {
+    /*color: #3f6870;*/
+}
+
+.galleryComponent {
+    background-color: #435c66;
+    border-radius: 5px 5px 5px 5px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: -10;
+    font-family: 'Electrolize';
+}
+
+.logo {
+    display: block;
+    left: -25px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

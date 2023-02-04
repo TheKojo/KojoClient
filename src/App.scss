@@ -26,9 +26,18 @@ html, body, #root {
 }
 
 .main-header {
+    font-family: "Electrolize";
+    display: block;
     grid-area: header;
     padding: 0.5rem;
+    text-align: right;
+    font-size: 12px;
+    background: linear-gradient(to right, rgba(11,32,36,0) 70%,rgba(11,32,36,1) 100%);
+    position: absolute;
+    width: 100%;
+    right: 0;
 }
+
 
 .main-container {
     grid-area: main;
@@ -42,8 +51,8 @@ html, body, #root {
     flex-direction: column;
     grid-area: sidebar;
     overflow-y: auto;
-    background-color: #344146;
-    
+    background-color: #0b2024;
+    font-family: 'Segoe UI';
 }
 
 .rs-sidenav-collapse-in {
@@ -52,11 +61,11 @@ html, body, #root {
 }
 
 .rs-sidenav-inverse {
-    background-color: #344146
+    background-color: #0b2024
 }
 
 .rs-sidenav-inverse .rs-sidenav-item, .rs-sidenav-inverse .rs-dropdown .rs-dropdown-toggle, .rs-sidenav-inverse .rs-sidenav-toggle-button, .rs-sidenav-inverse .rs-dropdown-item-submenu:hover > .rs-dropdown-item-toggle {
-    background-color: #344146
+    background-color: #0b2024
 }
 
 .rs-sidenav-item {

@@ -3978,7 +3978,8 @@ tbody.rs-anim-collapse.rs-anim-in {
 
 .rs-carousel {
     position: relative;
-    height: 400px;
+    height: 240px;
+    width: 370px;
     overflow: hidden;
     background-color: #8e8e93;
     background-color: var(--rs-carousel-bg);

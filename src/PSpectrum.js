@@ -6,7 +6,9 @@ import './App.scss'
 import Main from "./Main";
 import { Gallery } from './Gallery';
 import Home from './Home';
+import ComingSoon from './ComingSoon';
 import logo from './images/logo.png';
+import './PSpectrum.css';
 
 import {
     Route, Link, Routes, BrowserRouter, NavLink, useNavigate
@@ -19,9 +21,24 @@ import {
 export default function PSpectrum() {
 
     return (
-        <div>
+        <div id="mainWrapper">
             <img src={logo} className='logo' alt='' />
-            <Gallery />
+            <br/>
+            <h3>About</h3>
+            <hr class="solid" />
+            <div id="about" className='homeComponent'>
+                <Home />
+            </div>
+            <h3>Coming Soon</h3>
+            <hr class="solid" />
+            <div id="comingsoon" className='soonComponent'>
+                <ComingSoon />
+            </div>
+            <h3>Creature Index</h3>
+            <hr class="solid"/>
+            <div id="gallery" className='galleryComponent' >
+                <Gallery />
+            </div>
         </div>
     );
 };

@@ -1,0 +1,43 @@
+body {
+
+}
+
+
+#block1 {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 290px;
+}
+
+#block2 {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 530px;
+}
+
+#carWrapper {
+    overflow: auto;
+    float: left;
+    margin: 5px;
+}
+
+.imagesCars {
+    margin-right: 5px;
+}
+
+#img1,#img2 {
+    display: block;
+    padding: 5px;
+}
+
+.images {
+    vertical-align: middle;
+    display: block;
+    float: right;
+}
+
+.newSS {
+    vertical-align: top;
+}

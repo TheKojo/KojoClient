@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './images/logo.png';
-import './Gallery.css';
 import { PokeBox } from './PokeBox';
 
 export class Gallery extends Component {
@@ -33,7 +32,7 @@ export class Gallery extends Component {
 
     componentDidMount() {
         this.populatePkm();
-        document.body.style.backgroundColor = "#435c66";
+        //document.body.style.backgroundColor = "#435c66";
     }
 
     /*componentDidUpdate() {
@@ -64,8 +63,7 @@ export class Gallery extends Component {
     static renderLoading() {
         return (
             <div>
-                <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' />
-                <img src={logo} className='logo' alt='' />
+                
             </div>
         )
     }
@@ -73,9 +71,7 @@ export class Gallery extends Component {
     static renderPkm(state) {
         return (
             <div className='galleryBody'>
-                <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' />
                 <div>
-                    <img src={logo} className='logo' alt=''/>
                     {state.pkmList.map(pkm => (
                         <div key={pkm.id} >
                             <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={ pkm.regionalNumber } />

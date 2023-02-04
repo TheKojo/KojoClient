@@ -1,4 +1,4 @@
-import React, { Component, useState, useCallback } from 'react';
+import React, { Component, useState, useCallback, useEffect } from 'react';
 import { Layout } from './Layout';
 import { Col, Container, Row, Navbar } from 'react-bootstrap';
 import Sidebar from "react-bootstrap-sidebar-menu";
@@ -8,10 +8,12 @@ import { Sidenav, Nav } from "rsuite";
 import { Icon } from '@rsuite/icons';
 import { Gallery } from './Gallery';
 import Home from './Home';
+import PSpectrum from './PSpectrum';
 import ErrorPage from './Error';
-import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
+import DashboardIcon from "@rsuite/icons/legacy/Info";
 import GroupIcon from "@rsuite/icons/legacy/Group";
 import MagicIcon from "@rsuite/icons/legacy/Magic";
+import GameIcon from "@rsuite/icons/legacy/Gamepad";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import Git from "@rsuite/icons/legacy/Github";
 
@@ -19,7 +21,7 @@ import logo from './images/logo130wiki.png';
 import logoicon from './images/logoicon.svg';
 
 import {
-    Route, Link, Routes, BrowserRouter, NavLink, useNavigate
+    Route, Link, Routes, BrowserRouter, NavLink, useNavigate, useLocation
 } from "react-router-dom";
 
 
@@ -46,6 +48,9 @@ const CustomSidenav = ({
 }) => {
     return (
         <Layout>
+            <div className="main-header">
+                    Created by Asante Nyamekye
+            </div>
             <div style={styles} className="sidebar-menu">
                 <Sidenav
                     appearance={appearance}
@@ -56,16 +61,12 @@ const CustomSidenav = ({
                     <Sidenav.Toggle onToggle={onExpand} />
                     <Sidenav.Body>
                         <Nav {...navProps}>
-                            <Nav.Item eventKey="1" icon={<DashboardIcon />} onClick={useCallback(() => navigate('/', { replace: true }), [navigate])}>
-                                Home
+                            <Nav.Item eventKey="1" onClick={useCallback(() => navigate('/#about', { replace: true }), [navigate])} icon={<DashboardIcon />}>
+                                About
                             </Nav.Item>
-                            <Nav.Menu eventKey="3" title="P-Spectrum">
-                                
-                                <Nav.Item eventKey="3-1">About</Nav.Item>
-                                <Nav.Item eventKey="3-2" onClick={ useCallback(() => navigate('/gallery', { replace: true }), [navigate]) }>Gallery</Nav.Item>
-                                
-                                <Nav.Item eventKey="3-3">Patch Notes</Nav.Item>
-                                <Nav.Item eventKey="3-4">Download</Nav.Item>
+                            <Nav.Menu eventKey="3" title="P-Spectrum" icon={<GameIcon />}>
+                                <Nav.Item eventKey="3-1" onClick={useCallback(() => navigate('/#comingsoon', { replace: true }), [navigate])}>Coming Soon</Nav.Item>
+                                <Nav.Item eventKey="3-2" onClick={useCallback(() => navigate('/#gallery', { replace: true }), [navigate]) }>Gallery</Nav.Item>
                             </Nav.Menu>
                             <Nav.Item eventKey="4" title="Settings" icon={<Git />} href='https://github.com/TheKojo'>
                                 Github
@@ -76,7 +77,7 @@ const CustomSidenav = ({
             </div>
             <Main>
                 <Routes>
-                    <Route exact path='/' element={<Home/>} />
+                    <Route exact path='/' element={<PSpectrum/>} />
                     <Route exact path='/gallery' element={<Gallery/>} />
                 </Routes>
             </Main>
@@ -90,10 +91,32 @@ export default function App() {
     const [pageState, setState] = useState('gallery')
     const [activeKey, setActiveKey] = React.useState("1");
     const [openKeys, setOpenKeys] = React.useState(["3", "4"]);
-    const [expanded, setExpand] = React.useState(true);
+    const [expanded, setExpand] = React.useState(false);
 
     const navigate = useNavigate();
     //const handleOnClick = useCallback(() => navigate('/gallery', { replace: true }), [navigate]);
+
+
+    const { pathname, hash, key } = useLocation();
+
+    useEffect(() => {
+        // if not a hash link, scroll to top
+        if (hash === '') {
+            window.scrollTo(0, 0);
+        }
+        // else scroll to id
+        else {
+            setTimeout(() => {
+                const id = hash.replace('#', '');
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView();
+                }
+            }, 0);
+        }
+    }, [pathname, hash, key]); // do this on route change
+
+
 
     return (
         <>
