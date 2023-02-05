@@ -8,9 +8,9 @@ export default function ComingSoon() {
             <div id="block1">
                 <div id="carWrapper">
                     <Carousel className="imagesCars">
-                        <img src={require('./images/screenshots/nightslashanim.gif')} />
-                        <img src={require('./images/screenshots/lstest2.gif')} />
-                        <img src={require('./images/screenshots/peckanim.gif')} />
+                        <img src={require('./images/screenshots/nightslashanim.gif')} alt='' />
+                        <img src={require('./images/screenshots/lstest2.gif')} alt='' />
+                        <img src={require('./images/screenshots/peckanim.gif')} alt='' />
                     </Carousel>
                 </div>
                 <p>The next beta release under development is v1.5.0. A revamp is currently being done on the battle animations to speed up the battle system. HP bar drains and type effectiveness messages will be displayed while move animations are running, rather than being separate text messages. Many moves that were previously missing animations will be finally be given new ones.</p>
@@ -22,10 +22,10 @@ export default function ComingSoon() {
                 <div>
                     <div className="images">
                         <div id='img1'>
-                            <img src={require('./images/screenshots/ssnew1.png')} className="newSS" />
+                            <img src={require('./images/screenshots/ssnew1.png')} className="newSS" alt='' />
                         </div>
                         <div id='img2'>
-                            <img src={require('./images/screenshots/ssnew2.png')} className="newSS" />
+                            <img src={require('./images/screenshots/ssnew2.png')} className="newSS" alt='' />
                         </div>
                     </div>
                     <p>The update will be upgrading the Ruby Game Scripting System engine for drastically improved performance. The screen size will be yet again increased and adjusted to now fit 16:9 resolutions.</p>
