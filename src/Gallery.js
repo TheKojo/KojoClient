@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { PokeBox } from './PokeBox';
+import PokeBox from './PokeBox';
 
 function renderLoading() {
     return (
