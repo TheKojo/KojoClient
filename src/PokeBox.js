@@ -1,5 +1,5 @@
 import React from 'react';
-import './PokeBox.css';
+
 
 
 function padNum(val) {
@@ -41,10 +41,13 @@ const RenderedBox = (props) => {
                     <div className='highlight1' />
                     <div className='highlight2' />
                     <div className='spriteContainer'>
-                        <div className='spriteDiv'>
-                            <img src={require('./images/frontSprites/' + props.pkmId + '.png')} id={props.pkmId} className='sprite' title={props.pkmId} alt="pkm" />
-                        </div>
                         <div className='shadow' />
+                    </div>
+                </div>
+
+                <div className='pokeSpriteContainer'>
+                    <div className='spriteDiv'>
+                        <img src={require('./images/frontSprites/' + props.pkmId + '.png')} id={props.pkmId} className='sprite' title={props.pkmId} alt="pkm" />
                     </div>
                 </div>
 

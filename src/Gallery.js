@@ -1,10 +1,50 @@
 import React, { useEffect } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 import PokeBox from './PokeBox';
+import './PokeBox.css'; 
+
+const styles = {
+    display: "inline-table"
+};
+
+const Box = (props) => {
+    return(
+        <div>
+            <div style={{ opacity: props.opacity} }>
+                <div className={'pkmBox '}>
+                    <div className='highlight1' />
+                    <div className='highlight2' />
+                    <div className='spriteContainer'>
+                        <div className='shadow' />
+                        <div className='spriteDiv'>
+                            <Spinner style={{ position: 'relative', bottom: 10, color: '#435c66'}} />
+                        </div>
+                    </div>
+                </div>
+                <div className='nameContainer'>
+                    <div className='pkmName'></div>
+                </div>
+                <div className='numContainer'>
+                    <div className='pkmNum'>???</div>
+                </div>
+            </div>
+            <div className='shadowContainer'>
+                <div className='boxShadow' />
+            </div>
+        </div>
+    );
+};
 
 function renderLoading() {
     return (
         <div>
-
+            <Box opacity={1} />
+            <Box opacity={0.5} />
+            <Box opacity={0.25} />
+            <Box opacity={0.12} />
+            <Box opacity={0.06} />
+            <Box opacity={0.03} />
+            <Box opacity={0.01} />
         </div>
     )
 }
@@ -32,7 +72,7 @@ export default function Gallery() {
 
     useEffect(() => {
         async function populatePkm() {
-            const response = await fetch('http://kojoapiexpress-env.eba-cppcapc3.us-east-1.elasticbeanstalk.com/pokemon/getpkm?regionalOnly=true').then((response) => {
+            const response = await fetch('https://localhost:7260/pokemon/getpkm?regionalonly=true').then((response) => {
                 if (response.status >= 400 && response.status < 600) {
                     console.log('API returned response '+response.status);
                 }

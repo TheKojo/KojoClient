@@ -26,7 +26,6 @@ hr {
     background-color: #435c66;
     border-radius: 5px 5px 5px 5px;
     padding: 20px;
-    position: relative;
     overflow: hidden;
     z-index: -10;
     font-family: 'Electrolize';
