@@ -1,7 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import PokeBox from './PokeBox';
 import './PokeBox.css'; 
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
+
+const popover = (
+    <Popover id="popover-basic">
+        <Popover.Header as="h3">Popover right</Popover.Header>
+        <Popover.Body>
+            And here's some <strong>amazing</strong> content. It's very engaging.
+            right?
+        </Popover.Body>
+    </Popover>
+);
+
 
 const styles = {
     display: "inline-table"
@@ -49,14 +63,16 @@ function renderLoading() {
     )
 }
 
-function renderPkm(pkmList) {
+const RenderedPkm = (pkmList, target) => {
     return (
         <div className='galleryBody'>
             <div>
                 {pkmList.map(pkm => (
-                    <div key={pkm.id} >
-                        <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber} />
-                    </div>
+                    <OverlayTrigger key={"key "+pkm.id} trigger="click" placement="right" overlay={popover} >
+                        <div key={pkm.id} className="keyContainer" ref={target} onClick={ () => postPoke(pkm) } >             
+                            <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber} />
+                        </div>
+                    </OverlayTrigger>
                 ))}
             </div>
         </div>
@@ -64,11 +80,23 @@ function renderPkm(pkmList) {
 }
 
 
+ const postPoke = (poke) => {
+    /*let test = 'DABBING '+poke.id;
+    const response = fetch('https://localhost:7260/pokemon/postpkm?id='+test, {
+        method: 'POST',
+        body: JSON.stringify({ ID: test })
+    }).then((response) => { console.log('API returned post response '+response.status) });
+     console.log('running postPoke '+test);*/
+}
+    
+
+
 
 export default function Gallery() {
 
     const [loading, setLoading] = React.useState(true);
     const [pkmList, setState] = React.useState([]);
+    const target = useRef(null);
 
     useEffect(() => {
         async function populatePkm() {
@@ -92,7 +120,7 @@ export default function Gallery() {
 
     let contents = loading
         ? renderLoading()
-        : renderPkm(pkmList);
+        : RenderedPkm(pkmList, target);
 
     return (
         <div>

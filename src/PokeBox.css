@@ -17,6 +17,18 @@ a:focus {
     color: white;
 }
 
+.boxContainer:hover {
+    position: relative;
+    bottom: 2px;
+    right: 2px;
+}
+
+/* Controls container for  whole box*/
+.keyContainer{
+    position: relative;
+    float: left;
+}
+
 .pkmBox {
     position: relative;
     float: left;
@@ -32,12 +44,20 @@ a:focus {
     z-index: 2;
 }
 
+.boxContainer:hover .pkmBox {
+    background-color: #d7e7eb;
+}
+
+
 .highlight1 {
     position: absolute;
     background-color: #e6eced;
     height: 15px;
     width: 120px;
     border-radius: 5px 5px 0px 0px;
+}
+.boxContainer:hover .highlight1 {
+    background-color: #e3eff1;
 }
 
 .highlight2 {
@@ -46,6 +66,10 @@ a:focus {
     height: 16px;
     width: 120px;
     top: 15px;
+}
+
+.boxContainer:hover .highlight2 {
+    background-color: #dceaee;
 }
 
 .shadowContainer {
@@ -64,6 +88,7 @@ a:focus {
     top: 10px;
     border-radius: 5px 5px 5px 5px;
 }
+
 
 
 
@@ -213,6 +238,10 @@ a:focus {
     left: 12px;
     top: -20px;
     border-radius: 50% 50% 50% 50%;
+}
+
+.boxContainer:hover .shadow {
+    background-color: #bfd6dd;
 }
 
 
