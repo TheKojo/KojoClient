@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 
 function padNum(val) {
@@ -35,10 +35,10 @@ const RenderedBox = (props) => {
     
 
     return (
-        <div>
+        <div className={ props.focus } onClick={useCallback(() => props.focusFunc(props.pkmId), [props])}>
             <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' />
             
-                <div className='boxContainer'>
+                <div className={ 'boxContainer ' }>
                     <div className={'pkmBox '}>
                         <div className='highlight1' />
                         <div className='highlight2' />
@@ -50,7 +50,7 @@ const RenderedBox = (props) => {
                     <div className='pokeSpriteContainer'>
                         <div className='spriteDiv'>
                         
-                                <img src={require('./images/frontSprites/' + props.pkmId + '.png')} id={props.pkmId} className='sprite' title={props.pkmId} alt="pkm"/>
+                                <img src={require('./images/frontSprites/' + props.pkmId + '.png')} id={props.pkmId} className='sprite' alt="pkm"/>
 
                         </div>
                     </div>
@@ -76,7 +76,7 @@ const RenderedBox = (props) => {
 
                 </div>
 
-            <div className='shadowContainer'>
+            <div className={ 'shadowContainer ' }>
                 <div className='boxShadow' />
             </div>
 

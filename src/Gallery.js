@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import PokeBox from './PokeBox';
 import './PokeBox.css'; 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-
+import ReactCSSTransitionGroup from 'react-transition-group'; // ES6
 
 const popover = (
     <Popover id="popover-basic">
@@ -23,8 +23,8 @@ const styles = {
 
 const Box = (props) => {
     return(
-        <div>
-            <div style={{ opacity: props.opacity} }>
+        <div style={{ opacity: props.opacity }}>
+            <div>
                 <div className={'pkmBox '}>
                     <div className='highlight1' />
                     <div className='highlight2' />
@@ -63,16 +63,16 @@ function renderLoading() {
     )
 }
 
-const RenderedPkm = (pkmList, target) => {
+const RenderedPkm = (pkmList, target, focusFunction, focus) => {
+
     return (
         <div className='galleryBody'>
             <div>
                 {pkmList.map(pkm => (
-                    <OverlayTrigger key={"key "+pkm.id} trigger="click" placement="right" overlay={popover} >
-                        <div key={pkm.id} className="keyContainer" ref={target} onClick={ () => postPoke(pkm) } >             
-                            <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber} />
+                        <div key={pkm.id} className="keyContainer" ref={target}  >             
+                        <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
+                            focusFunc={focusFunction} focus={focus === pkm.id ? "view-focus" : (focus === "" ? "view-default" : "view-unfocus")} />
                         </div>
-                    </OverlayTrigger>
                 ))}
             </div>
         </div>
@@ -88,15 +88,22 @@ const RenderedPkm = (pkmList, target) => {
     }).then((response) => { console.log('API returned post response '+response.status) });
      console.log('running postPoke '+test);*/
 }
+
     
-
-
 
 export default function Gallery() {
 
-    const [loading, setLoading] = React.useState(true);
-    const [pkmList, setState] = React.useState([]);
+    const [loading, setLoading] = useState(true);
+    const [pkmList, setState] = useState([]);
+    const [focusedPoke, setFocusPoke] = useState("");
     const target = useRef(null);
+
+    const showPokeDetail = (pokeId) => {
+        if (focusedPoke === pokeId) {
+            pokeId = "";
+        }
+        setFocusPoke(pokeId);
+    }
 
     useEffect(() => {
         async function populatePkm() {
@@ -116,12 +123,15 @@ export default function Gallery() {
         if (loading) {
             populatePkm();
         }
-    });
+    }, [loading, focusedPoke]);
 
-    let contents = loading
-        ? renderLoading()
-        : RenderedPkm(pkmList, target);
-
+    var contents;
+    if (loading) {
+        contents = renderLoading();
+    }
+    else {
+        contents = RenderedPkm(pkmList, target, showPokeDetail, focusedPoke);
+    }
     return (
         <div>
             {contents}

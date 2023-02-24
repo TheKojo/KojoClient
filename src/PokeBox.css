@@ -17,7 +17,7 @@ a:focus {
     color: white;
 }
 
-.boxContainer:hover {
+.boxContainer:hover.view-default, .boxContainer:hover.view-focus {
     position: relative;
     bottom: 2px;
     right: 2px;
@@ -45,7 +45,28 @@ a:focus {
 }
 
 .boxContainer:hover .pkmBox {
-    background-color: #d7e7eb;
+    background-color: #cdedf5;
+}
+
+.view-unfocus {
+    opacity: 0.1;
+    transition: opacity 0.3s;
+}
+
+.view-default {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+
+
+.shadowContainer.view-unfocus {
+    opacity: 0;
+}
+
+.shadowContainer.view-default {
+    opacity: 1;
+    transition: opacity 0.3s;
 }
 
 
@@ -57,7 +78,7 @@ a:focus {
     border-radius: 5px 5px 0px 0px;
 }
 .boxContainer:hover .highlight1 {
-    background-color: #e3eff1;
+    background-color: #dcf4f8;
 }
 
 .highlight2 {
@@ -69,7 +90,7 @@ a:focus {
 }
 
 .boxContainer:hover .highlight2 {
-    background-color: #dceaee;
+    background-color: #d3eff7;
 }
 
 .shadowContainer {
@@ -77,6 +98,7 @@ a:focus {
     float: left;
     z-index: 1;
 }
+
 
 .boxShadow {
     position: absolute;
@@ -241,7 +263,7 @@ a:focus {
 }
 
 .boxContainer:hover .shadow {
-    background-color: #bfd6dd;
+    background-color: #b0deec;
 }
 
 
@@ -263,15 +285,15 @@ a:focus {
         }
 
 .GRASS {
-    background-color: #40d42c;
+    background-color: #61d42c;
 }
 
     .GRASS + .GRASS {
-        background-color: #7cd42c;
+        background-color: #91d42c;
     }
 
         .GRASS + .GRASS + .GRASS {
-            background-color: #1ec92c;
+            background-color: #1dbf28;
         }
 
 .FIRE {
