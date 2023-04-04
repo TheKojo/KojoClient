@@ -94,7 +94,7 @@ const styles = {
 
 const StatBar = (props) => {
     return (
-        <div className='stat-bar'></div>
+        <div className='stat-bar'><div className='stat-text'>{ props.stat }</div></div>
     );
 }
 
