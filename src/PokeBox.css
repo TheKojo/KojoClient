@@ -17,6 +17,7 @@ a:focus {
     color: white;
 }
 
+
 .boxContainer:hover.view-default, .boxContainer:hover.view-focus {
     position: relative;
     bottom: 2px;
@@ -43,6 +44,63 @@ a:focus {
     border-radius: 5px 5px 5px 5px;
     z-index: 2;
 }
+
+.stat-box-wrapper.view-default, .stat-box-wrapper.view-unfocus {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.stat-box-wrapper.view-focus {
+    top: 137px;
+    left: 6px;
+}
+
+.stat-box-wrapper {
+    position: relative;
+}
+
+
+
+.stat-box {
+    position: absolute;
+    width: 382px;
+    height: 200px;
+    background-color: #272e30;
+    z-index: 15;
+    opacity: 0.8;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.stat-container {
+    display: inline-block;
+    height: 200px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-style: solid;
+}
+
+.stat-label {
+    background-color: black;
+    border-radius: 5px 5px 5px 5px;
+    text-align: center;
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+}
+
+.stat-bar {
+    width: 40px;
+    height: 50px; 
+    background-color: green;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    top: 50px;
+    border-style: solid;
+}
+
 
 .boxContainer:hover .pkmBox {
     background-color: #cdedf5;

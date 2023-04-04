@@ -71,7 +71,8 @@ const RenderedPkm = (pkmList, target, focusFunction, focus) => {
                 {pkmList.map(pkm => (
                         <div key={pkm.id} className="keyContainer" ref={target}  >             
                         <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
-                            focusFunc={focusFunction} focus={focus === pkm.id ? "view-focus" : (focus === "" ? "view-default" : "view-unfocus")} />
+                            focusFunc={focusFunction} focus={focus === pkm.id ? "view-focus" : (focus === "" ? "view-default" : "view-unfocus")}
+                            hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed} />
                         </div>
                 ))}
             </div>
@@ -89,6 +90,8 @@ const RenderedPkm = (pkmList, target, focusFunction, focus) => {
      console.log('running postPoke '+test);*/
 }
 
+
+
     
 
 export default function Gallery() {
@@ -103,23 +106,31 @@ export default function Gallery() {
             pokeId = "";
         }
         setFocusPoke(pokeId);
+        console.log("Focus on " + pokeId);
     }
 
     useEffect(() => {
+        console.log('Running effect...');
         async function populatePkm() {
+            console.log('Populating Pokemon...');
             const response = await fetch('https://localhost:7260/pokemon/getpkm?regionalonly=true').then((response) => {
-                if (response.status >= 400 && response.status < 600) {
-                    console.log('API returned response '+response.status);
-                }
+                //if (response.status >= 400 && response.status < 600) {
+                    console.log('Pkm API returned response '+response.status);
+                //}
                 return response;
             }).catch((error) => {
                 console.log('Error trying to fetch GetPkm: ' + error);
             })
-            const data = await response.json();
-            setState(data);
-            setLoading(false);
-        }
+            try {
+                const data = await response.json();
+                setState(data);
+                setLoading(false);
+            }
+            catch(error) {
+                console.log('Error trying to fetch GetPkm: ' + error.message);
+            }
 
+        }
         if (loading) {
             populatePkm();
         }

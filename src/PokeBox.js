@@ -84,6 +84,55 @@ const RenderedBox = (props) => {
     );
 }
 
+const styles = {
+    width: "40px",
+    height: "50px",
+    backgroundColor: "green",
+    marginLeft: "5px",
+    borderRadius: "5px 5px 5px 5px"
+};
+
+const StatBar = (props) => {
+    return (
+        <div className='stat-bar'></div>
+    );
+}
+
+const StatBox = (props) => {
+
+    return (
+        <div className={'stat-box-wrapper ' + props.focus}>
+            <div className='stat-box'>
+                <div className='stat-container'>
+                    <StatBar stat={props.hp} />
+                    <div className='stat-label'>HP</div>
+                </div>
+                <div className='stat-container'>
+                    <StatBar stat={props.attack} />
+                    <div className='stat-label'>Atk</div>
+                </div>
+                <div className='stat-container'>
+                    <StatBar stat={props.defense} />
+                    <div className='stat-label'>Def</div>
+                </div>
+                <div className='stat-container'>
+                    <StatBar stat={props.spAttack} />
+                    <div className='stat-label'>Atk</div>
+                </div>
+                <div className='stat-container'>
+                    <StatBar stat={props.spDefense} />
+                    <div className='stat-label'>Def</div>
+                </div>
+                <div className='stat-container'>
+                    <StatBar stat={props.speed} />
+                    <div className='stat-label'>Spe</div>
+                </div>
+                
+            </div>
+        </div>
+    );
+}
+
 
 export default function PokeBox(props) {
 
@@ -92,6 +141,7 @@ export default function PokeBox(props) {
     return (
         <div>
             <RenderedBox {...props} />
+            <StatBox {...props} />
         </div>
     );
 }
