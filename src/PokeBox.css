@@ -91,16 +91,23 @@ a:focus {
     bottom: 0;
 }
 
+.stat-bar-container {
+    width: 40px;
+    height: 160px;
+    position: relative;
+    top: 10px;
+}
+
 .stat-bar {
     width: 40px;
-    height: 50px; 
-    background-color: green;
+    height: 0px;
+    /*#57d943;  #bfd943 */
     border-radius: 5px 5px 5px 5px;
-    position: relative;
-    top: 124px;
-
+    position: absolute;
+    bottom: 0;
     font-size: 12px;
 }
+
 
 .stat-text {
     position: absolute;

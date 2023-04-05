@@ -84,17 +84,33 @@ const RenderedBox = (props) => {
     );
 }
 
-const styles = {
-    width: "40px",
-    height: "50px",
-    backgroundColor: "green",
-    marginLeft: "5px",
-    borderRadius: "5px 5px 5px 5px"
-};
 
 const StatBar = (props) => {
+
+    let barStyle;
+
+    const barStyleOpened = {
+        height: (Math.min(props.stat, 150) / 150 * 160) + "px",
+        backgroundImage: "linear-gradient(#57d943, #bfd943)",
+        transition: "height 0.5s"
+    };
+
+    const barStyleClosed = {
+        height: "0px",
+        backgroundImage: "linear-gradient(#57d943, #bfd943)",
+    };
+
+    if (props.focus === "view-focus") {
+        barStyle = barStyleOpened;
+    }
+    else {
+        barStyle = barStyleClosed;
+    }
+
     return (
-        <div className='stat-bar'><div className='stat-text'>{ props.stat }</div></div>
+        <div className='stat-bar-container'>
+            <div className='stat-bar' style={barStyle}><div className='stat-text'>{props.stat}</div></div>
+        </div>
     );
 }
 
@@ -104,27 +120,27 @@ const StatBox = (props) => {
         <div className={'stat-box-wrapper ' + props.focus}>
             <div className='stat-box'>
                 <div className='stat-container'>
-                    <StatBar stat={props.hp} />
+                    <StatBar stat={props.hp} focus={ props.focus }/>
                     <div className='stat-label'>HP</div>
                 </div>
                 <div className='stat-container'>
-                    <StatBar stat={props.attack} />
+                    <StatBar stat={props.attack} focus={props.focus} />
                     <div className='stat-label'>Atk</div>
                 </div>
                 <div className='stat-container'>
-                    <StatBar stat={props.defense} />
+                    <StatBar stat={props.defense} focus={props.focus} />
                     <div className='stat-label'>Def</div>
                 </div>
                 <div className='stat-container'>
-                    <StatBar stat={props.spAttack} />
+                    <StatBar stat={props.spAttack} focus={props.focus} />
                     <div className='stat-label'>Atk</div>
                 </div>
                 <div className='stat-container'>
-                    <StatBar stat={props.spDefense} />
+                    <StatBar stat={props.spDefense} focus={props.focus} />
                     <div className='stat-label'>Def</div>
                 </div>
                 <div className='stat-container'>
-                    <StatBar stat={props.speed} />
+                    <StatBar stat={props.speed} focus={props.focus} />
                     <div className='stat-label'>Spe</div>
                 </div>
                 
