@@ -84,20 +84,37 @@ const RenderedBox = (props) => {
     );
 }
 
+const getGradientStr = (color1, color2) => {
+    return "linear-gradient(" + color1 + ", " + color2 + ")";
+}
+
 
 const StatBar = (props) => {
 
     let barStyle;
+    const darkred = "#db1017";
+    const lightred = "#ff430c";
+    const orange = "#ff8010";
+    const yellow = "#ffc70f";
+    const lightgreen = "#3bd424";
+    const darkgreen = "#bce725";
+    let gradient = getGradientStr(darkgreen, lightgreen);
+    if (props.stat < 50) {
+        gradient = getGradientStr(lightred, darkred);
+    }
+    else if (props.stat < 90) {
+        gradient = getGradientStr(yellow, orange);
+    }
 
     const barStyleOpened = {
         height: (Math.min(props.stat, 150) / 150 * 160) + "px",
-        backgroundImage: "linear-gradient(#57d943, #bfd943)",
+        backgroundImage: gradient,
         transition: "height 0.5s"
     };
 
     const barStyleClosed = {
         height: "0px",
-        backgroundImage: "linear-gradient(#57d943, #bfd943)",
+        backgroundImage: getGradientStr(lightred, darkred)
     };
 
     if (props.focus === "view-focus") {
