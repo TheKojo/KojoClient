@@ -50,8 +50,24 @@ a:focus {
     opacity: 0;
 }
 
-.stat-box-wrapper.view-focus {
+.stat-box-wrapper.view-focus.bottom {
     top: 137px;
+}
+
+.stat-box-wrapper.view-focus.top {
+    top: -256px;
+}
+
+
+.stat-box-wrapper.view-focus.center {
+    left: -125px;
+}
+
+.stat-box-wrapper.view-focus.left {
+    left: -256px;
+}
+
+.stat-box-wrapper.view-focus.right {
     left: 6px;
 }
 
@@ -59,12 +75,44 @@ a:focus {
     position: relative;
 }
 
+.stat-box-wrapper .arrow.bottom {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #272e30;
+    bottom: 0px;
+    opacity: 0.8;
+}
 
+.stat-box-wrapper .arrow.top {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #272e30;
+    top: 251px;
+    opacity: 0.8;
+}
+
+
+.stat-box-wrapper.left .arrow {
+    left: 320px;
+}
+.stat-box-wrapper.right .arrow {
+    left: 58px;
+}
+
+.stat-box-wrapper.center .arrow {
+    left: 188px;
+}
 
 .stat-box {
     position: absolute;
     width: 382px;
-    height: 200px;
+    height: 251px;
     background-color: #272e30;
     z-index: 15;
     opacity: 0.8;
@@ -73,7 +121,7 @@ a:focus {
 
 .stat-container {
     display: inline-block;
-    height: 200px;
+    height: 250px;
     margin-left: 5px;
     position: relative;
     bottom: 10px;
@@ -91,9 +139,23 @@ a:focus {
     bottom: 0;
 }
 
+.stat-label sup{
+    right: 4px;
+    opacity: 0.5;
+}
+
+
+.stat-label div {
+    display: inline;
+    position: relative;
+    right: 4px;
+}
+
+
+
 .stat-bar-container {
     width: 40px;
-    height: 160px;
+    height: 210px;
     position: relative;
     top: 10px;
 }

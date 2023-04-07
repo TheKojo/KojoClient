@@ -133,8 +133,32 @@ const StatBar = (props) => {
 
 const StatBox = (props) => {
 
+    let position = "";
+    let direction = "";
+
+    //Determine top/bottom position
+    if (props.index < 100) {
+        direction = " bottom";
+    }
+    else {
+        direction = " top";
+    }
+
+    //Determine left/right position
+    if (parseInt(props.index) % 7 > 4) {
+        position = " left";
+    }
+    else if (parseInt(props.index) % 7 < 2) {
+        position = " right";
+    }
+    else {
+        position = " center";
+    }
+
+
     return (
-        <div className={'stat-box-wrapper ' + props.focus}>
+        <div className={'stat-box-wrapper ' + props.focus + position + direction}>
+            <div className={'arrow'+direction}></div>
             <div className='stat-box'>
                 <div className='stat-container'>
                     <StatBar stat={props.hp} focus={ props.focus }/>
@@ -150,11 +174,11 @@ const StatBox = (props) => {
                 </div>
                 <div className='stat-container'>
                     <StatBar stat={props.spAttack} focus={props.focus} />
-                    <div className='stat-label'>Atk</div>
+                    <div className='stat-label'><sup><i>Sp</i></sup><div>Atk</div></div>
                 </div>
                 <div className='stat-container'>
                     <StatBar stat={props.spDefense} focus={props.focus} />
-                    <div className='stat-label'>Def</div>
+                    <div className='stat-label'><sup><i>Sp</i></sup><div>Def</div></div>
                 </div>
                 <div className='stat-container'>
                     <StatBar stat={props.speed} focus={props.focus} />

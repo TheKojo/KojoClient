@@ -68,11 +68,12 @@ const RenderedPkm = (pkmList, target, focusFunction, focus) => {
     return (
         <div className='galleryBody'>
             <div>
-                {pkmList.map(pkm => (
+                {pkmList.map((pkm, idx) => (
                         <div key={pkm.id} className="keyContainer" ref={target}  >             
                         <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
                             focusFunc={focusFunction} focus={focus === pkm.id ? "view-focus" : (focus === "" ? "view-default" : "view-unfocus")}
-                            hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed} />
+                            hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed}
+                            index={idx} />
                         </div>
                 ))}
             </div>
