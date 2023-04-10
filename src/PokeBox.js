@@ -35,7 +35,7 @@ const RenderedBox = (props) => {
     
 
     return (
-        <div className={ props.focus } onClick={useCallback(() => props.focusFunc(props.pkmId), [props])}>
+        <div className={props.focus} onClick={useCallback(() => props.focusFunc(props.pkmId, props.index), [props])}>
             <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' />
             
                 <div className={ 'boxContainer ' }>
@@ -91,6 +91,8 @@ const getGradientStr = (color1, color2) => {
 
 const StatBar = (props) => {
 
+    const maxStatScale = 150;
+    const maxBarHeight = 145;
     let barStyle;
     const darkred = "#db1017";
     const lightred = "#ff430c";
@@ -107,7 +109,7 @@ const StatBar = (props) => {
     }
 
     const barStyleOpened = {
-        height: (Math.min(props.stat, 150) / 150 * 160) + "px",
+        height: (Math.min(props.stat, maxStatScale) / maxStatScale * maxBarHeight) + "px",
         backgroundImage: gradient,
         transition: "height 0.5s"
     };
@@ -135,9 +137,10 @@ const StatBox = (props) => {
 
     let position = "";
     let direction = "";
+    let dexEntryStr = "";
 
     //Determine top/bottom position
-    if (props.index < 100) {
+    if (props.index < 90) {
         direction = " bottom";
     }
     else {
@@ -154,12 +157,51 @@ const StatBox = (props) => {
     else {
         position = " center";
     }
+    if (props.focus === "view-focus") {
+        dexEntryStr = props.dexEntry.replace("Pok\u201amon", "Pok\u00e9mon").trim();
+        const dexEntryArr = dexEntryStr.split(".");
+        dexEntryStr = "";
+        for (let i = 0; i < dexEntryArr.length-1; i++) {
+            if ((dexEntryStr + dexEntryArr[i]).length < 130 || i == 0) {
+                dexEntryStr += dexEntryArr[i] + ". "
+            }
+            else {
+                break;
+            }
+        }
+        if (dexEntryStr.length > 130) {
+            dexEntryStr = dexEntryStr.substring(0, 130)+"...";
+        }
+        if (dexEntryStr.length === 0) {
+            dexEntryStr = "???";
+        }
+    }
 
-
+    let abilityJSX = (<div>
+                            <div className='ability-label'>Ability 1</div>
+                            <div className='ability-text'>{props.ability1}</div>
+                            <div className='ability-label'>Ability 2</div>
+                            <div className='ability-text'>{props.ability2}</div>
+                    </div>)
+    if (props.ability2 === '') {
+        abilityJSX = (<div>
+                        <div className='ability-label'>Ability 1</div>
+                        <div className='ability-text'>{props.ability1}</div>
+                    </div>)
+    }
+    
     return (
         <div className={'stat-box-wrapper ' + props.focus + position + direction}>
             <div className={'arrow'+direction}></div>
             <div className='stat-box'>
+                <div className='dexentry-container' focus={props.focus}>
+                    <div className='dexentry-text'>{dexEntryStr}</div>
+                </div>
+                <div className='ability-container' focus={props.focus}>
+                    <div className='ability-label'>Category</div>
+                    <div className='ability-text'>{props.category}</div>
+                    {abilityJSX}
+                </div>
                 <div className='stat-container'>
                     <StatBar stat={props.hp} focus={ props.focus }/>
                     <div className='stat-label'>HP</div>

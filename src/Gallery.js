@@ -63,19 +63,39 @@ function renderLoading() {
     )
 }
 
-const RenderedPkm = (pkmList, target, focusFunction, focus) => {
+const RenderedPkm = (pkmList, target, focusFunction, focus, directList, indirectList) => {
 
     return (
         <div className='galleryBody'>
             <div>
-                {pkmList.map((pkm, idx) => (
-                        <div key={pkm.id} className="keyContainer" ref={target}  >             
-                        <PokeBox pkmId={pkm.id} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
-                            focusFunc={focusFunction} focus={focus === pkm.id ? "view-focus" : (focus === "" ? "view-default" : "view-unfocus")}
-                            hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed}
-                            index={idx} />
+                {pkmList.map((pkm, idx) => {
+                    var focusStr = "";
+                    if (focus === "") {
+                        focusStr = "view-default";
+                    }
+                    else {
+                        focusStr = "view-unfocus";
+                    }
+                    if (focus === pkm.pokemonId) {
+                        focusStr = "view-focus";
+                    }
+                    else if (directList.includes(pkm.pokemonId)) {
+                        focusStr = "view-directevo";
+                    }
+                    else if (indirectList.includes(pkm.pokemonId)) {
+                        focusStr = "view-indirectevo";
+                    }
+                    return (
+                        <div key={pkm.pokemonId} className="keyContainer" ref={target}  >
+                            <PokeBox pkmId={pkm.pokemonId} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
+                                focusFunc={focusFunction} focus={focusStr}
+                                hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed}
+                                ability1={pkm.ability1} ability2={pkm.ability2} abilityH={pkm.ability3} dexEntry={pkm.dexEntry} category={pkm.category}
+                                index={idx} />
                         </div>
-                ))}
+                    )
+                    })
+                }
             </div>
         </div>
     );
@@ -99,15 +119,23 @@ export default function Gallery() {
 
     const [loading, setLoading] = useState(true);
     const [pkmList, setState] = useState([]);
+    const [directEvoList, setDirectFamily] = useState([]);
+    const [indirectEvoList, setIndirectFamily] = useState([]);
     const [focusedPoke, setFocusPoke] = useState("");
     const target = useRef(null);
 
-    const showPokeDetail = (pokeId) => {
+    const showPokeDetail = (pokeId, arrIdx) => {
+        //Turn off
         if (focusedPoke === pokeId) {
-            pokeId = "";
+            setFocusPoke("");
+            setDirectFamily([]);
+            setIndirectFamily([]);
         }
-        setFocusPoke(pokeId);
-        console.log("Focus on " + pokeId);
+        else {
+            setFocusPoke(pokeId);
+            setDirectFamily(pkmList[arrIdx].directFamily)
+            setIndirectFamily(pkmList[arrIdx].indirectFamily)
+        }
     }
 
     useEffect(() => {
@@ -142,7 +170,7 @@ export default function Gallery() {
         contents = renderLoading();
     }
     else {
-        contents = RenderedPkm(pkmList, target, showPokeDetail, focusedPoke);
+        contents = RenderedPkm(pkmList, target, showPokeDetail, focusedPoke, directEvoList, indirectEvoList);
     }
     return (
         <div>
