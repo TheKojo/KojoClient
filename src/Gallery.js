@@ -25,25 +25,25 @@ const Box = (props) => {
     return(
         <div style={{ opacity: props.opacity }}>
             <div>
-                <div className={'pkmBox '}>
+                <div className={'pkm-box '}>
                     <div className='highlight1' />
                     <div className='highlight2' />
-                    <div className='spriteContainer'>
+                    <div className='sprite-container'>
                         <div className='shadow' />
-                        <div className='spriteDiv'>
+                        <div className='sprite-div'>
                             <Spinner style={{ position: 'relative', bottom: 10, color: '#435c66'}} />
                         </div>
                     </div>
                 </div>
-                <div className='nameContainer'>
-                    <div className='pkmName'></div>
+                <div className='name-container'>
+                    <div className='pkm-name'></div>
                 </div>
-                <div className='numContainer'>
-                    <div className='pkmNum'>???</div>
+                <div className='num-container'>
+                    <div className='pkm-num'>???</div>
                 </div>
             </div>
-            <div className='shadowContainer'>
-                <div className='boxShadow' />
+            <div className='shadow-container'>
+                <div className='box-shadow' />
             </div>
         </div>
     );
@@ -66,7 +66,7 @@ function renderLoading() {
 const RenderedPkm = (pkmList, target, focusFunction, focus, directList, indirectList) => {
 
     return (
-        <div className='galleryBody'>
+        <div className='gallery-body'>
             <div>
                 {pkmList.map((pkm, idx) => {
                     var focusStr = "";
@@ -86,8 +86,8 @@ const RenderedPkm = (pkmList, target, focusFunction, focus, directList, indirect
                         focusStr = "view-indirectevo";
                     }
                     return (
-                        <div key={pkm.pokemonId} className="keyContainer" ref={target}  >
-                            <PokeBox pkmId={pkm.pokemonId} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
+                        <div key={pkm.pokemonId} className="key-container" ref={target}  >
+                            <PokeBox key={pkm.pokemonId} pkmId={pkm.pokemonId} name={pkm.name} type1={pkm.type1} type2={pkm.type2} dexNum={pkm.regionalNumber}
                                 focusFunc={focusFunction} focus={focusStr}
                                 hp={pkm.hp} attack={pkm.attack} defense={pkm.defense} spAttack={pkm.spAttack} spDefense={pkm.spDefense} speed={pkm.speed}
                                 ability1={pkm.ability1} ability2={pkm.ability2} abilityH={pkm.ability3} dexEntry={pkm.dexEntry} category={pkm.category}
@@ -139,19 +139,22 @@ export default function Gallery() {
     }
 
     useEffect(() => {
-        console.log('Running effect...');
+        //console.log('Running effect...');
         async function populatePkm() {
-            console.log('Populating Pokemon...');
-            const response = await fetch('https://localhost:7260/pokemon/getpkm?regionalonly=true').then((response) => {
+            /*
+            //console.log('Populating Pokemon...');
+            //http://kojoapi-dev.eba-7kpauzwj.us-east-1.elasticbeanstalk.com/pokemon/getpkm?regionalonly=true
+            //https://localhost:7260/pokemon/getpkm?regionalonly=true
+            const response = await fetch('http://kojoapi-dev.eba-7kpauzwj.us-east-1.elasticbeanstalk.com/pokemon/getpkm?regionalonly=true').then((response) => {
                 //if (response.status >= 400 && response.status < 600) {
                     console.log('Pkm API returned response '+response.status);
                 //}
                 return response;
             }).catch((error) => {
                 console.log('Error trying to fetch GetPkm: ' + error);
-            })
+            })*/
             try {
-                const data = await response.json();
+                const data = require('./data/pkmdata.json')//await response.json();
                 setState(data);
                 setLoading(false);
             }

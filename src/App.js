@@ -20,6 +20,8 @@ const styles = {
     display: "inline-table"
 };
 
+export const UserContext = React.createContext(null);
+
 
 const CustomSidenav = ({
     page,

@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from 'react';
+import { useWindowDimensions } from './WindowDimensions';
 
 
 function padNum(val) {
@@ -24,60 +25,57 @@ function typeColor(props) {
 
 
 
-function renderBlank() {
-    return (
-        <div>
-        </div>
-    );
-}
-
 const RenderedBox = (props) => {
-    
+
+    var imgExtension = ".png";
+    if (props.focus === "view-focus") {
+        imgExtension = ".gif";
+    }
 
     return (
-        <div className={props.focus} onClick={useCallback(() => props.focusFunc(props.pkmId, props.index), [props])}>
+        <div className={props.focus} onClick={() => props.focusFunc(props.pkmId, props.index)}>
             <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' />
             
-                <div className={ 'boxContainer ' }>
-                    <div className={'pkmBox '}>
+                <div className={ 'box-container ' }>
+                    <div className={'pkm-box '}>
                         <div className='highlight1' />
                         <div className='highlight2' />
-                        <div className='spriteContainer'>
+                        <div className='sprite-container'>
                             <div className='shadow' />
                         </div>
                     </div>
 
-                    <div className='pokeSpriteContainer'>
-                        <div className='spriteDiv'>
+                    <div className='pokesprite-container'>
+                        <div className='sprite-div'>
                         
-                                <img src={require('./images/frontSprites/' + props.pkmId + '.png')} id={props.pkmId} className='sprite' alt="pkm"/>
+                        <img src={require('./images/frontSprites/' + props.pkmId + imgExtension)} id={props.pkmId} className='sprite' alt="pkm"/>
 
                         </div>
                     </div>
 
-                    <div className='nameContainer'>
-                        <div className='pkmName'>{props.name}</div>
+                    <div className='name-container'>
+                        <div className='pkm-name'>{props.name}</div>
                     </div>
-                    <div className='typeContainer'>
-                        <div className='1Container'>
-                            <div className={'typeBox1 ' + props.type1} />
-                            <div className={'typeBox1H ' + props.type1} />
-                            <div className={'typeBox1S ' + props.type1} />
+                    <div className='type-container'>
+                        <div className='type-1-container'>
+                            <div className={'type-box-1 ' + props.type1} />
+                            <div className={'type-box-1H ' + props.type1} />
+                            <div className={'type-box-1S ' + props.type1} />
                         </div>
-                        <div className='2Container'>
-                            <div className={'typeBox2 ' + typeColor(props)} />
-                            <div className={'typeBox2H ' + typeColor(props)} />
-                            <div className={'typeBox2S ' + typeColor(props)} />
+                        <div className='type-2-container'>
+                            <div className={'type-box-2 ' + typeColor(props)} />
+                            <div className={'type-box-2H ' + typeColor(props)} />
+                            <div className={'type-box-2S ' + typeColor(props)} />
                         </div>
                     </div>
-                    <div className='numContainer'>
-                        <div className='pkmNum'>{padNum(props.dexNum)}</div>
+                    <div className='num-container'>
+                        <div className='pkm-num'>{padNum(props.dexNum)}</div>
                     </div>
 
                 </div>
 
-            <div className={ 'shadowContainer ' }>
-                <div className='boxShadow' />
+            <div className={ 'shadow-container ' }>
+                <div className='box-shadow' />
             </div>
 
         </div>
@@ -133,11 +131,23 @@ const StatBar = (props) => {
     );
 }
 
+
 const StatBox = (props) => {
+
+    const { height, width } = useWindowDimensions();
 
     let position = "";
     let direction = "";
     let dexEntryStr = "";
+    let numberPerRow = 7;
+    let middleLow = 2;
+    let middleHigh = 4;
+
+    if (width <= 480) {
+        numberPerRow = 3;
+        middleLow = 1;
+        middleHigh = 1;
+    }
 
     //Determine top/bottom position
     if (props.index < 90) {
@@ -148,10 +158,10 @@ const StatBox = (props) => {
     }
 
     //Determine left/right position
-    if (parseInt(props.index) % 7 > 4) {
+    if (parseInt(props.index) % numberPerRow > middleHigh) {
         position = " left";
     }
-    else if (parseInt(props.index) % 7 < 2) {
+    else if (parseInt(props.index) % numberPerRow < middleLow) {
         position = " right";
     }
     else {
